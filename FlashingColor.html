@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script
+            src="https://code.jquery.com/jquery-3.1.1.min.js"
+            integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+            crossorigin="anonymous"></script>
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+</head>
+<body>
+<div>
+    <p>Hello !</p>
+    <p>Hello there !</p>
+    <p>This is D3 !</p>
+</div>
+</body>
+<script>
+    function init() {
+        d3.selectAll("p").style("color", function() {
+            return "hsl(" + Math.random() * 360 + ",100%,50%)";
+        });
+    }
+    init();
+    setInterval(init, 1000)
+</script>
+</html>
