@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>TwoWay</title>
+</head>
+<body>
+    <div>
+        <input type="text" data-custom="price" name="" />
+    </div>
+    <div>
+        <input type="text" data-custom="price" name="" />
+    </div>
+    <div>
+        <span data-custom="price"></span>
+    </div>
+    <div>
+        <h3 data-custom="price"></h3>
+    </div>
+</body>
+<script>
+    var dataBinder = function (attr, model)
+    {
+        var subs = [], that = this;
+        that.value = "";
+        that.publish = function () {
+            subs.forEach(function (e) {
+                if(e.nodeName == "INPUT") {
+                    e.value = that.value;
+                }
+                else
+                {
+                    e.innerHTML = that.value;
+                }
+
+            });
+        }
+        that.eventCallBack =  function (e) {
+            that.value = e.srcElement.value;
+            that.publish();
+        }
+        var elems = document.querySelectorAll("["+attr+"='"+model+"'");
+        elems.forEach(function (node) {
+            if(node.nodeName == "INPUT"){
+                node.addEventListener("change", that.eventCallBack);
+                node.addEventListener("keyup", that.eventCallBack);
+            }
+            subs.push(node);
+        });
+
+    }
+
+    var attr = "data-custom", model = "price";
+    new dataBinder(attr, model);
+    //store all pubs
+    //add event listeners to all pubs
+    //store all subs
+    // on change notify all subs
+
+</script>
+</html>
